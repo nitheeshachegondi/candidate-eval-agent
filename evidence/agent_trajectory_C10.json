@@ -1,0 +1,24 @@
+{
+  "case_id": "C10",
+  "steps": [
+    {
+      "step": "evidence_extraction",
+      "input": "CV: 4 yrs, owned two services end-to-end at a B2B SaaS company, mentored two juniors.\nInterview: Explained a specific tradeoff decision (denormalizing a table for read performance) with clear reasoning about when they'd reverse it. Communicated clearly, translated technical tradeoff into business impact.\nAssessment: 9/10.",
+      "note": "Pulls out discrete claims per source before any judgment is made."
+    },
+    {
+      "step": "cross_source_verification",
+      "input": "claims from step 1",
+      "note": "Checks CV claims against interview answers and assessment behavior for both factual contradictions and evasive/unsubstantiated answers."
+    },
+    {
+      "step": "recommendation",
+      "output": {
+        "decision": "advance",
+        "confidence": "high",
+        "reasoning": "The candidate has 4 years of relevant B2B SaaS experience, ownership of end-to-end services, mentorship experience, and demonstrated ability to articulate technical tradeoffs with business impact. The interview feedback highlights clear communication and solid reasoning, and the assessment score of 9/10 indicates strong performance. No contradictions or unsubstantiated claims were identified."
+      },
+      "note": "Final decision + confidence; contradictions route to human review, not auto-reject."
+    }
+  ]
+}

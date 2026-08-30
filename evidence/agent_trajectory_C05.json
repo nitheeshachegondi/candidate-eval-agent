@@ -1,0 +1,24 @@
+{
+  "case_id": "C05",
+  "steps": [
+    {
+      "step": "evidence_extraction",
+      "input": "CV: 3 yrs experience, 8-month employment gap listed.\nInterview: Explained gap clearly as a family medical leave, returned with a personal project (documented on GitHub) demonstrating continued skill.\nAssessment: 7/10: solid.",
+      "note": "Pulls out discrete claims per source before any judgment is made."
+    },
+    {
+      "step": "cross_source_verification",
+      "input": "claims from step 1",
+      "note": "Checks CV claims against interview answers and assessment behavior for both factual contradictions and evasive/unsubstantiated answers."
+    },
+    {
+      "step": "recommendation",
+      "output": {
+        "decision": "advance",
+        "confidence": "high",
+        "reasoning": "The candidate's 8-month employment gap is clearly explained as a family medical leave and is supported by a personal project on GitHub that demonstrates continued skill development. The overall assessment of 7/10 indicates a solid fit, with no contradictions or unsubstantiated claims detected."
+      },
+      "note": "Final decision + confidence; contradictions route to human review, not auto-reject."
+    }
+  ]
+}

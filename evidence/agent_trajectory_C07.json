@@ -1,0 +1,24 @@
+{
+  "case_id": "C07",
+  "steps": [
+    {
+      "step": "evidence_extraction",
+      "input": "CV: 6 yrs experience but entirely in a different stack (embedded C), no Python production work.\nInterview: Strong engineer, clearly experienced, but admits limited Python exposure ('learning it now').\nAssessment: 5/10: functional but non-idiomatic Python, clearly a non-native Python speaker.",
+      "note": "Pulls out discrete claims per source before any judgment is made."
+    },
+    {
+      "step": "cross_source_verification",
+      "input": "claims from step 1",
+      "note": "Checks CV claims against interview answers and assessment behavior for both factual contradictions and evasive/unsubstantiated answers."
+    },
+    {
+      "step": "recommendation",
+      "output": {
+        "decision": "reject",
+        "confidence": "high",
+        "reasoning": "The candidate has 6 years of experience in a different stack (embedded C) with no production Python work. During the interview they admitted limited Python exposure and are still learning it. Their assessment score of 5/10 reflects functional but non-idiomatic Python, indicating they are not proficient enough for the role. No contradictions or unsubstantiated claims were found."
+      },
+      "note": "Final decision + confidence; contradictions route to human review, not auto-reject."
+    }
+  ]
+}

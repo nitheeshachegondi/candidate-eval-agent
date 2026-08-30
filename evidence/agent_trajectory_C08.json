@@ -1,0 +1,24 @@
+{
+  "case_id": "C08",
+  "steps": [
+    {
+      "step": "evidence_extraction",
+      "input": "CV: 3 yrs Python, Postgres, plus 1.5 yrs at a Series A startup with distributed systems (Kafka) exposure.\nInterview: Clear, specific answers about a Kafka consumer-lag incident. Consistent with CV.\nAssessment: 8/10.",
+      "note": "Pulls out discrete claims per source before any judgment is made."
+    },
+    {
+      "step": "cross_source_verification",
+      "input": "claims from step 1",
+      "note": "Checks CV claims against interview answers and assessment behavior for both factual contradictions and evasive/unsubstantiated answers."
+    },
+    {
+      "step": "recommendation",
+      "output": {
+        "decision": "advance",
+        "confidence": "high",
+        "reasoning": "The candidate's CV and interview responses are consistent, with specific, verifiable details about Kafka experience that align with the stated background. No contradictions or unsubstantiated claims were detected."
+      },
+      "note": "Final decision + confidence; contradictions route to human review, not auto-reject."
+    }
+  ]
+}

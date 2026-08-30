@@ -1,0 +1,24 @@
+{
+  "case_id": "C03",
+  "steps": [
+    {
+      "step": "evidence_extraction",
+      "input": "CV: CV claims '5 yrs, led a team of 4, owned payments service at [mid-size fintech]' with strong, polished bullet points.\nInterview: When asked to walk through a specific technical decision on the payments service, answers were vague and generic ('we used best practices', 'the team decided together'). Could not name the database used or describe a single incident. Timeline of the fintech role (14 months per LinkedIn-style record) doesn't match '5 yrs' framing of ownership on CV.\nAssessment: 9/10 take-home: excellent, idiomatic code \u2014 notably stronger than the interview performance would suggest, and stylistically inconsistent with the candidate's live-coding notes from the interview.",
+      "note": "Pulls out discrete claims per source before any judgment is made."
+    },
+    {
+      "step": "cross_source_verification",
+      "input": "claims from step 1",
+      "note": "Checks CV claims against interview answers and assessment behavior for both factual contradictions and evasive/unsubstantiated answers."
+    },
+    {
+      "step": "recommendation",
+      "output": {
+        "decision": "reject_pending_verification",
+        "confidence": "high",
+        "reasoning": "The candidate's CV claims 5 years of experience and ownership of a payments service, yet the interview revealed vague, non-specific answers, inability to name key technical details, and a timeline mismatch (only 14 months shown on LinkedIn). These unresolved contradictions and unsubstantiated claims warrant human review before a final decision."
+      },
+      "note": "Final decision + confidence; contradictions route to human review, not auto-reject."
+    }
+  ]
+}

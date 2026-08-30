@@ -1,0 +1,24 @@
+{
+  "case_id": "C06",
+  "steps": [
+    {
+      "step": "evidence_extraction",
+      "input": "CV: 3 yrs experience, two unexplained 6+ month gaps.\nInterview: Vague, evasive answers about the gaps ('personal reasons', declined to elaborate twice when asked directly about work during those periods).\nAssessment: 6/10: adequate.",
+      "note": "Pulls out discrete claims per source before any judgment is made."
+    },
+    {
+      "step": "cross_source_verification",
+      "input": "claims from step 1",
+      "note": "Checks CV claims against interview answers and assessment behavior for both factual contradictions and evasive/unsubstantiated answers."
+    },
+    {
+      "step": "recommendation",
+      "output": {
+        "decision": "reject_pending_verification",
+        "confidence": "high",
+        "reasoning": "The candidate has two unexplained gaps of over six months each and provided vague, evasive answers when directly asked about them, offering no substantiated explanation. This constitutes an unsubstantiated claim that requires further verification before a final hiring decision."
+      },
+      "note": "Final decision + confidence; contradictions route to human review, not auto-reject."
+    }
+  ]
+}

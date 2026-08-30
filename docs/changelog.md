@@ -1,0 +1,30 @@
+# Improvement Changelog
+
+Numbers below are from live runs on Groq (`openai/gpt-oss-120b`), not mock output — submission-ready.
+
+**Note on run-to-run variance:** across 3 live runs, the agent scored 75%/67% once and 92%/100% twice (baseline was 67%/0% all 3 times). We report the majority result (92%/100%) below, but the variance itself is real and worth stating plainly — even at temperature=0, LLM outputs aren't fully deterministic, so a serious evaluation needs multiple runs, not one. See the second hot take at the bottom.
+
+| Stage | What we tried and why | Evidence | Decision / learning |
+|---|---|---|---|
+| Baseline | Single direct prompt: full case dumped in, asked for advance/reject. Represents how a recruiter using a plain LLM chat today would do this. | Accuracy: 67% (8/12) · Contradiction catch rate: 0% (0/4 hard cases) — consistent across all 3 runs | Established the starting point. It never once flagged a conflicting-signal case in any run — it has no mechanism to compare sources against each other, so a polished CV + strong take-home always wins even when the interview contradicts them. |
+| Iteration 1 | Added an explicit evidence-extraction step per source before any judgment, so claims are discrete instead of buried in prose. | Enabled step 2 below; not separately measured. | Kept — required as input to verification. |
+| Iteration 2 | Added a cross-source verification step: check CV claims against interview answers and assessment behavior for contradictions. | Accuracy: 92% (11/12) · Contradiction catch rate: 100% (4/4 hard cases) in 2 of 3 live runs; 75%/67% in the third | Kept — this is the step responsible for the entire accuracy gap over baseline, in every run regardless of variance. |
+| Iteration 3 | Broadened the verification step to also treat evasive/non-specific answers under direct questioning as unsubstantiated claims, not just hard factual contradictions — targeting the one consistent miss (C06). | 92%/100% across 3 further live runs, fully consistent (no more run-to-run variance); C06 still misses | Kept (it stabilized the results and is a genuinely more complete definition of "verification"), but did not close the C06 gap — see below for why. |
+| Iteration 4 (considered, removed) | Tried a 5th step: a second "devil's advocate" agent that re-argued for advancing every flagged case, to reduce false positives. | Not run live — removed after mock testing showed it added latency without changing any decision. | Removed. Documenting this because a real lesson worth keeping: not every extra agent step earns its cost — measure before keeping it, not after. |
+| Final | Extract → verify (facts + evasiveness) → recommend, contradictions routed to human review instead of auto-rejected. | 92% accuracy, 100% contradiction catch, consistent across repeated live runs | Main contribution: the verification step, not the number of pipeline stages. |
+
+## What the agent still gets wrong (and why this matters more than a clean scoreboard)
+
+We tried one further iteration after the numbers above: broadened the verification step's instructions to explicitly treat evasive or non-specific answers under direct questioning as a form of unsubstantiated claim, not just hard factual contradictions — targeting **C06** specifically, where the signal is the candidate's evasive tone about an unexplained gap, not a fact that conflicts with another fact.
+
+Result across 3 further live runs: **fully consistent (92%/100% all three times, C06 missed all three times)** — a meaningful change in itself, since the pre-broadening runs had varied between 75%/67% and 92%/100%. But C06 still doesn't match ground truth. Reading the actual reasoning in `evidence/agent_trajectory_C06.json`: the model isn't failing to notice the evasiveness — it's making a judgment call that evasive answers about an unexplained gap are severe enough to reject outright, rather than flag for human follow-up. Ground truth wanted `reject_pending_verification`; the model consistently says `reject`. Both conclusions agree the candidate shouldn't advance as-is; they disagree only on whether a human should double-check first.
+
+That's a more specific and more honest finding than "the agent missed a case": the remaining gap isn't a detection failure, it's a disagreement about **when a red flag is severe enough to decide outright versus severe enough to merely escalate** — a genuinely subjective line, not an obvious bug.
+
+*(Open `evidence/agent_trajectory_C06.json` to see this reasoning directly — good material for the video.)*
+
+## Hot take
+A naive "score each source and average" approach — which is what most recruiters and most baseline LLM prompts effectively do — is structurally blind to a specific and common failure mode: a candidate whose CV and take-home both look excellent in isolation but who can't substantiate the CV's claims live, under interview pressure. Cross-checking sources catches this reliably (C03, C09, C12 across runs) far better than averaging ever could. But the mechanism has a specific, consistent blind spot: it reliably catches factual contradictions and reliably misses tone-based ones (C06). The lesson for building reliable agents generally: a verification step is worth more than almost any other single addition, but "verification" isn't one capability — checking facts against facts is a different (and easier) problem than checking tone against claims, and a real evaluation should say which one your agent actually does.
+
+## Second hot take: single-run evaluations overstate confidence
+Running the same live evaluation 3 times with temperature=0 produced two different scores (75%/67% once, 92%/100% twice) for the identical code and identical cases. If we had only run it once and gotten the 75% result, we'd have reported a materially weaker (and equally misleading) story. The practical lesson: any agent evaluation reported from a single run should be treated with real skepticism, including this one's — 3 runs is better than 1, but still not enough to fully characterize the variance. Report a range or majority result, not a cherry-picked best run.

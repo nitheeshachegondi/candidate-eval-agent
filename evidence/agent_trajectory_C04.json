@@ -1,0 +1,24 @@
+{
+  "case_id": "C04",
+  "steps": [
+    {
+      "step": "evidence_extraction",
+      "input": "CV: 3.5 yrs, owned a FastAPI service with async job queue, has on-call rotation experience.\nInterview: Explained async/await tradeoffs correctly, described a real deadlock bug and fix. Consistent with CV.\nAssessment: 7/10: solid solution, reasonable tests.",
+      "note": "Pulls out discrete claims per source before any judgment is made."
+    },
+    {
+      "step": "cross_source_verification",
+      "input": "claims from step 1",
+      "note": "Checks CV claims against interview answers and assessment behavior for both factual contradictions and evasive/unsubstantiated answers."
+    },
+    {
+      "step": "recommendation",
+      "output": {
+        "decision": "advance",
+        "confidence": "high",
+        "reasoning": "The candidate's CV claims and interview responses are consistent, demonstrating relevant experience with FastAPI, async job queues, and on-call rotation. They correctly explained async/await tradeoffs and described a real deadlock bug and its fix, indicating solid technical understanding. The assessment score of 7/10 reflects a competent solution with reasonable testing, supporting a positive hiring recommendation."
+      },
+      "note": "Final decision + confidence; contradictions route to human review, not auto-reject."
+    }
+  ]
+}

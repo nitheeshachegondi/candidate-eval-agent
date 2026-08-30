@@ -1,0 +1,24 @@
+{
+  "case_id": "C02",
+  "steps": [
+    {
+      "step": "evidence_extraction",
+      "input": "CV: 2 yrs, mostly internal tooling scripts, no production ownership claimed.\nInterview: Could describe scripts but not how they were deployed or monitored. No on-call experience.\nAssessment: 4/10 take-home: works but has SQL injection vulnerability and no error handling.",
+      "note": "Pulls out discrete claims per source before any judgment is made."
+    },
+    {
+      "step": "cross_source_verification",
+      "input": "claims from step 1",
+      "note": "Checks CV claims against interview answers and assessment behavior for both factual contradictions and evasive/unsubstantiated answers."
+    },
+    {
+      "step": "recommendation",
+      "output": {
+        "decision": "reject",
+        "confidence": "high",
+        "reasoning": "The candidate has only 2 years of internal tooling experience with no production ownership or on-call responsibilities. During the interview they could not explain deployment or monitoring, indicating a lack of depth. The take\u2011home assignment, while functional, contains a critical SQL injection vulnerability and lacks error handling, reflecting insufficient security and robustness skills. Overall the profile does not meet the required standards, so the candidate should be rejected."
+      },
+      "note": "Final decision + confidence; contradictions route to human review, not auto-reject."
+    }
+  ]
+}

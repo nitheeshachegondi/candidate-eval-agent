@@ -1,0 +1,24 @@
+{
+  "case_id": "C01",
+  "steps": [
+    {
+      "step": "evidence_extraction",
+      "input": "CV: 4 yrs backend eng at a logistics startup. Built and owned a Postgres-backed routing service. Led migration from monolith to two services.\nInterview: Clearly explained the migration decision, tradeoffs of splitting the service, and a specific on-call incident (DB connection pool exhaustion) with root cause. Answers were specific and consistent with CV.\nAssessment: 8/10 take-home: correct solution, clean code, one minor edge case missed.",
+      "note": "Pulls out discrete claims per source before any judgment is made."
+    },
+    {
+      "step": "cross_source_verification",
+      "input": "claims from step 1",
+      "note": "Checks CV claims against interview answers and assessment behavior for both factual contradictions and evasive/unsubstantiated answers."
+    },
+    {
+      "step": "recommendation",
+      "output": {
+        "decision": "advance",
+        "confidence": "high",
+        "reasoning": "The candidate's interview responses were specific, consistent with the CV, and demonstrated clear understanding of migration decisions and incident handling. The take\u2011home assessment was largely correct with only a minor edge case missed, indicating strong technical competence."
+      },
+      "note": "Final decision + confidence; contradictions route to human review, not auto-reject."
+    }
+  ]
+}

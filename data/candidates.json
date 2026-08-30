@@ -1,0 +1,167 @@
+{
+  "job": {
+    "title": "Mid-level Backend Engineer (Python)",
+    "must_haves": [
+      "3+ years production Python",
+      "Experience with relational databases (Postgres/MySQL)",
+      "Comfortable owning a service end-to-end (design, build, deploy, on-call)",
+      "Can communicate tradeoffs clearly to non-engineers"
+    ],
+    "nice_to_haves": [
+      "Experience with async frameworks (FastAPI, asyncio)",
+      "Exposure to distributed systems / message queues",
+      "Prior startup experience"
+    ],
+    "red_flags": [
+      "No verifiable production experience",
+      "Cannot explain their own past project decisions",
+      "Unexplained employment gaps with vague answers"
+    ]
+  },
+  "cases": [
+    {
+      "id": "C01",
+      "label": "clean_strong",
+      "cv_summary": "4 yrs backend eng at a logistics startup. Built and owned a Postgres-backed routing service. Led migration from monolith to two services.",
+      "interview_notes": "Clearly explained the migration decision, tradeoffs of splitting the service, and a specific on-call incident (DB connection pool exhaustion) with root cause. Answers were specific and consistent with CV.",
+      "assessment_score": "8/10 take-home: correct solution, clean code, one minor edge case missed.",
+      "ground_truth": {
+        "decision": "advance",
+        "confidence": "high",
+        "reasoning": "CV, interview, and assessment all corroborate each other. No contradictions."
+      }
+    },
+    {
+      "id": "C02",
+      "label": "clean_weak",
+      "cv_summary": "2 yrs, mostly internal tooling scripts, no production ownership claimed.",
+      "interview_notes": "Could describe scripts but not how they were deployed or monitored. No on-call experience.",
+      "assessment_score": "4/10 take-home: works but has SQL injection vulnerability and no error handling.",
+      "ground_truth": {
+        "decision": "reject",
+        "confidence": "high",
+        "reasoning": "Below the must-have bar (production ownership) and assessment confirms gaps."
+      }
+    },
+    {
+      "id": "C03",
+      "label": "conflicting_signals_HARD",
+      "cv_summary": "CV claims '5 yrs, led a team of 4, owned payments service at [mid-size fintech]' with strong, polished bullet points.",
+      "interview_notes": "When asked to walk through a specific technical decision on the payments service, answers were vague and generic ('we used best practices', 'the team decided together'). Could not name the database used or describe a single incident. Timeline of the fintech role (14 months per LinkedIn-style record) doesn't match '5 yrs' framing of ownership on CV.",
+      "assessment_score": "9/10 take-home: excellent, idiomatic code — notably stronger than the interview performance would suggest, and stylistically inconsistent with the candidate's live-coding notes from the interview.",
+      "ground_truth": {
+        "decision": "reject_pending_verification",
+        "confidence": "medium",
+        "reasoning": "Strong artifacts (CV, take-home) but interview cannot substantiate CV claims, and take-home style doesn't match live coding style — suggests possible take-home assistance or CV inflation. This is the case a naive system would wrongly advance because two of three signals look excellent."
+      }
+    },
+    {
+      "id": "C04",
+      "label": "clean_strong",
+      "cv_summary": "3.5 yrs, owned a FastAPI service with async job queue, has on-call rotation experience.",
+      "interview_notes": "Explained async/await tradeoffs correctly, described a real deadlock bug and fix. Consistent with CV.",
+      "assessment_score": "7/10: solid solution, reasonable tests.",
+      "ground_truth": {
+        "decision": "advance",
+        "confidence": "high",
+        "reasoning": "Consistent, meets must-haves and some nice-to-haves."
+      }
+    },
+    {
+      "id": "C05",
+      "label": "gap_explained",
+      "cv_summary": "3 yrs experience, 8-month employment gap listed.",
+      "interview_notes": "Explained gap clearly as a family medical leave, returned with a personal project (documented on GitHub) demonstrating continued skill.",
+      "assessment_score": "7/10: solid.",
+      "ground_truth": {
+        "decision": "advance",
+        "confidence": "high",
+        "reasoning": "Gap is explained and substantiated; not a genuine red flag despite matching the JD's red-flag keyword."
+      }
+    },
+    {
+      "id": "C06",
+      "label": "gap_unexplained",
+      "cv_summary": "3 yrs experience, two unexplained 6+ month gaps.",
+      "interview_notes": "Vague, evasive answers about the gaps ('personal reasons', declined to elaborate twice when asked directly about work during those periods).",
+      "assessment_score": "6/10: adequate.",
+      "ground_truth": {
+        "decision": "reject_pending_verification",
+        "confidence": "medium",
+        "reasoning": "Matches JD's explicit red flag; evasiveness (not the gap itself) is the actual signal."
+      }
+    },
+    {
+      "id": "C07",
+      "label": "clean_weak",
+      "cv_summary": "6 yrs experience but entirely in a different stack (embedded C), no Python production work.",
+      "interview_notes": "Strong engineer, clearly experienced, but admits limited Python exposure ('learning it now').",
+      "assessment_score": "5/10: functional but non-idiomatic Python, clearly a non-native Python speaker.",
+      "ground_truth": {
+        "decision": "reject",
+        "confidence": "high",
+        "reasoning": "Doesn't meet the specific must-have (3+ yrs production Python) despite general seniority."
+      }
+    },
+    {
+      "id": "C08",
+      "label": "nice_to_have_boost",
+      "cv_summary": "3 yrs Python, Postgres, plus 1.5 yrs at a Series A startup with distributed systems (Kafka) exposure.",
+      "interview_notes": "Clear, specific answers about a Kafka consumer-lag incident. Consistent with CV.",
+      "assessment_score": "8/10.",
+      "ground_truth": {
+        "decision": "advance",
+        "confidence": "high",
+        "reasoning": "Meets must-haves and several nice-to-haves, fully corroborated."
+      }
+    },
+    {
+      "id": "C09",
+      "label": "conflicting_signals_moderate",
+      "cv_summary": "CV states 'expert in FastAPI and asyncio', listed as a core skill at the top.",
+      "interview_notes": "When asked a basic asyncio question (difference between concurrency and parallelism in Python's GIL context), gave an incorrect answer and could not self-correct when prompted.",
+      "assessment_score": "6/10: take-home used Flask, not FastAPI, despite FastAPI being listed as their tool of choice.",
+      "ground_truth": {
+        "decision": "reject_pending_verification",
+        "confidence": "medium",
+        "reasoning": "A stated 'expert' skill is contradicted by both the interview and the candidate's own tool choice on the take-home."
+      }
+    },
+    {
+      "id": "C10",
+      "label": "clean_strong",
+      "cv_summary": "4 yrs, owned two services end-to-end at a B2B SaaS company, mentored two juniors.",
+      "interview_notes": "Explained a specific tradeoff decision (denormalizing a table for read performance) with clear reasoning about when they'd reverse it. Communicated clearly, translated technical tradeoff into business impact.",
+      "assessment_score": "9/10.",
+      "ground_truth": {
+        "decision": "advance",
+        "confidence": "high",
+        "reasoning": "Strong on both the must-have technical bar and the communication must-have."
+      }
+    },
+    {
+      "id": "C11",
+      "label": "clean_weak_confident",
+      "cv_summary": "CV is extremely polished, uses strong action verbs and metrics ('improved performance by 300%') but metrics are unexplained.",
+      "interview_notes": "Could not explain how the 300% figure was measured or what the baseline was. Vague on methodology when pressed twice.",
+      "assessment_score": "5/10: below par, several bugs.",
+      "ground_truth": {
+        "decision": "reject",
+        "confidence": "high",
+        "reasoning": "Unsubstantiated metrics plus a weak assessment; CV polish alone is not evidence."
+      }
+    },
+    {
+      "id": "C12",
+      "label": "conflicting_signals_moderate",
+      "cv_summary": "CV claims sole ownership of a well-known open-source-adjacent internal tool.",
+      "interview_notes": "Described the tool accurately and in detail, but repeatedly used 'we' language and, when asked directly 'what part did you personally write', named only a small config module; the rest was attributed to 'the team'.",
+      "assessment_score": "7/10.",
+      "ground_truth": {
+        "decision": "reject_pending_verification",
+        "confidence": "medium",
+        "reasoning": "Scope of ownership on CV ('sole ownership') is contradicted by the candidate's own interview language once probed."
+      }
+    }
+  ]
+}

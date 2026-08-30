@@ -1,0 +1,24 @@
+{
+  "case_id": "C12",
+  "steps": [
+    {
+      "step": "evidence_extraction",
+      "input": "CV: CV claims sole ownership of a well-known open-source-adjacent internal tool.\nInterview: Described the tool accurately and in detail, but repeatedly used 'we' language and, when asked directly 'what part did you personally write', named only a small config module; the rest was attributed to 'the team'.\nAssessment: 7/10.",
+      "note": "Pulls out discrete claims per source before any judgment is made."
+    },
+    {
+      "step": "cross_source_verification",
+      "input": "claims from step 1",
+      "note": "Checks CV claims against interview answers and assessment behavior for both factual contradictions and evasive/unsubstantiated answers."
+    },
+    {
+      "step": "recommendation",
+      "output": {
+        "decision": "reject_pending_verification",
+        "confidence": "high",
+        "reasoning": "The candidate's CV asserts sole ownership of the tool, yet during the interview they used collective language ('we') and, when asked about personal contributions, identified only a minor config module, attributing the rest to the team. This contradiction indicates an unsubstantiated claim that requires human review."
+      },
+      "note": "Final decision + confidence; contradictions route to human review, not auto-reject."
+    }
+  ]
+}

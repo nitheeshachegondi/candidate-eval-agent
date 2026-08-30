@@ -1,0 +1,24 @@
+{
+  "case_id": "C09",
+  "steps": [
+    {
+      "step": "evidence_extraction",
+      "input": "CV: CV states 'expert in FastAPI and asyncio', listed as a core skill at the top.\nInterview: When asked a basic asyncio question (difference between concurrency and parallelism in Python's GIL context), gave an incorrect answer and could not self-correct when prompted.\nAssessment: 6/10: take-home used Flask, not FastAPI, despite FastAPI being listed as their tool of choice.",
+      "note": "Pulls out discrete claims per source before any judgment is made."
+    },
+    {
+      "step": "cross_source_verification",
+      "input": "claims from step 1",
+      "note": "Checks CV claims against interview answers and assessment behavior for both factual contradictions and evasive/unsubstantiated answers."
+    },
+    {
+      "step": "recommendation",
+      "output": {
+        "decision": "reject_pending_verification",
+        "confidence": "high",
+        "reasoning": "The candidate's CV claims expertise in FastAPI and asyncio, yet during the interview they provided an incorrect answer to a fundamental asyncio question and could not self-correct, indicating a lack of depth. Additionally, their take\u2011home project used Flask instead of FastAPI, contradicting the stated core skill. These unresolved contradictions warrant human review before a final decision."
+      },
+      "note": "Final decision + confidence; contradictions route to human review, not auto-reject."
+    }
+  ]
+}

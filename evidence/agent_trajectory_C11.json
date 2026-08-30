@@ -1,0 +1,24 @@
+{
+  "case_id": "C11",
+  "steps": [
+    {
+      "step": "evidence_extraction",
+      "input": "CV: CV is extremely polished, uses strong action verbs and metrics ('improved performance by 300%') but metrics are unexplained.\nInterview: Could not explain how the 300% figure was measured or what the baseline was. Vague on methodology when pressed twice.\nAssessment: 5/10: below par, several bugs.",
+      "note": "Pulls out discrete claims per source before any judgment is made."
+    },
+    {
+      "step": "cross_source_verification",
+      "input": "claims from step 1",
+      "note": "Checks CV claims against interview answers and assessment behavior for both factual contradictions and evasive/unsubstantiated answers."
+    },
+    {
+      "step": "recommendation",
+      "output": {
+        "decision": "reject_pending_verification",
+        "confidence": "high",
+        "reasoning": "The candidate cites a 300% performance improvement without providing any supporting data or clear baseline. During the interview they could not explain how the figure was measured and gave vague, non\u2011specific answers when pressed on methodology, indicating an unsubstantiated claim. This unresolved contradiction warrants flagging for human review."
+      },
+      "note": "Final decision + confidence; contradictions route to human review, not auto-reject."
+    }
+  ]
+}
